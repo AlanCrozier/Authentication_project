@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask, redirect, render_template, request, session, url_for
 from Form import RegistrationForm
 from model.user import db
@@ -8,8 +10,14 @@ from model.user import User
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your_secret_key'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:%23Alan123@localhost:3306/full_stack'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:%23Alan123@localhost:3306/full_stack'
+# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db_url = os.environ.get("postgresql://authentication_bd_mott_user:aVlDJ9gxgjUj8oGIKrcuvn98j6y4XXoc@dpg-d6rskrvkijhs73eumbhg-a/authentication_bd_mott")
+
+if db_url and db_url.startswith("postgres://"):
+    db_url = db_url.replace("postgres://", "postgresql://", 1)
+app.config["SQLALCHEMY_DATABASE_URI"] = db_url
+
 
 db.init_app(app)
 with app.app_context():
