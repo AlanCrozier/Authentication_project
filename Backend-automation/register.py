@@ -12,7 +12,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your_secret_key'
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:%23Alan123@localhost:3306/full_stack'
 # app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db_url = os.environ.get("postgresql://authentication_bd_mott_user:aVlDJ9gxgjUj8oGIKrcuvn98j6y4XXoc@dpg-d6rskrvkijhs73eumbhg-a/authentication_bd_mott")
+db_url = os.environ.get("DATABASE_URL", "mysql://root:@localhost:3306/full_stack")
 
 if db_url and db_url.startswith("postgres://"):
     db_url = db_url.replace("postgres://", "postgresql://", 1)
