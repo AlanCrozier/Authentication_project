@@ -19,10 +19,10 @@ if db_url and db_url.startswith("postgres://"):
 app.config["SQLALCHEMY_DATABASE_URI"] = db_url
 
 
-db.init_app(app)
-with app.app_context():
-    db.create_all()
-    print("Database tables created successfully.")
+# db.init_app(app)
+# with app.app_context():
+#     db.create_all()
+    # print("Database tables created successfully.")
 @app.route('/register',methods=["GET","POST"])
 def register():
     form = RegistrationForm()
