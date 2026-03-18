@@ -4,7 +4,7 @@ from model.users import Users
 from model.users import db
 
 from form import RegisterForm
-
+import os
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "your_secret_key_here"
