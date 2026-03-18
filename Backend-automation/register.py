@@ -1,6 +1,7 @@
 import os
 
 from flask import Flask, redirect, render_template, request, session, url_for
+from flask_login import LoginManager, current_user, login_required, login_user, logout_user
 from Form import RegistrationForm
 from model.user import db
 import bcrypt
@@ -17,13 +18,20 @@ db_url = os.environ.get("DATABASE_URL", "mysql://root:@localhost:3306/full_stack
 if db_url and db_url.startswith("postgres://"):
     db_url = db_url.replace("postgres://", "postgresql://", 1)
 app.config["SQLALCHEMY_DATABASE_URI"] = db_url
+loginmanager = LoginManager()
+loginmanager.init_app(app)
+loginmanager.login_view = "login"
 
 
-# db.init_app(app)
-# with app.app_context():
-#     db.create_all()
-    # print("Database tables created successfully.")
-@app.route()
+@loginmanager.user_loader
+def load_user(user_id):
+    return Users.query.get(int(user_id))
+
+db.init_app(app)
+with app.app_context():
+    db.create_all()
+    print("Database tables created successfully.")
+@app.route("/")
 def register():
     form = RegistrationForm()
     if request.method == "POST" and form.validate_on_submit():
