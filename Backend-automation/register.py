@@ -31,7 +31,7 @@ db.init_app(app)
 with app.app_context():
     db.create_all()
     print("Database tables created successfully.")
-@app.route("/")
+@app.route("/register")
 def register():
     form = RegistrationForm()
     if request.method == "POST" and form.validate_on_submit():
