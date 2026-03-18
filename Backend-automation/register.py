@@ -23,7 +23,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = db_url
 # with app.app_context():
 #     db.create_all()
     # print("Database tables created successfully.")
-@app.route('/register',methods=["GET","POST"])
+@app.route()
 def register():
     form = RegistrationForm()
     if request.method == "POST" and form.validate_on_submit():
